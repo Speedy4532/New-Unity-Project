@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DreamCar01Track : MonoBehaviour
 {
-   public class Dreamcar01Track : MonoBehaviour
-{
+   
 
 	public GameObject TheMarker;
 	public GameObject Mark01;
@@ -59,6 +59,6 @@ public class DreamCar01Track : MonoBehaviour
 			this.GetComponent<BoxCollider>().enabled = true;
 		}
 	}
-}
+
 
 }
