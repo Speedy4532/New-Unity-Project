@@ -16,11 +16,18 @@ public class LapComp : MonoBehaviour
 
 	//public GameObject LapTimeBox;
 	public GameObject Announcer;
-	public int counterCar1 = -1;
-    public int counterCar2 = -1;
-    public GameObject car1;
-    public GameObject car2;
+	public static int count = 0;
+   
+    public GameObject MyCar;
+    public GameObject Car1;
+    public GameObject Car2;
+
+    public GameObject Panel2;
+    public GameObject Panel2Text;
     public GameObject CarControlM;
+    public GameObject OnGame;
+   
+
 
     //void OnTriggerEnter(Collider collision)
     //{
@@ -66,7 +73,7 @@ public class LapComp : MonoBehaviour
 		if (collision.gameObject.tag == "Player")
 		{
             
-            if (counterCar1 == -1)
+            if (count == 0)
 			{
                 
 				//counter = 0;
@@ -77,72 +84,80 @@ public class LapComp : MonoBehaviour
                 yield return new WaitForSeconds(2f);
                 Announcer.GetComponent<Text>().text = " ";
                 HalfLapTrig.SetActive(true);
+                count++;
                 LapCompleteTrig.SetActive(false);
                 
 
             }
-            else if(counterCar1 == 0)
+            else if(count == 1)
             {
 				Announcer.GetComponent<Text>().text = "Last Lap";
 				
                 yield return new WaitForSeconds(2f);
                 Announcer.GetComponent<Text>().text = " ";
                 HalfLapTrig.SetActive(true);
+                count++;
                 //CarControlM.SetActive(true);
                 LapCompleteTrig.SetActive(false);
             }
-            else if(counterCar1 == 1)
+            else if(count == 2)
             {
-                Rigidbody rb = car1.GetComponent<Rigidbody>();
+                Rigidbody rb = MyCar.GetComponent<Rigidbody>();
                 rb.drag = 23f;
-                Rigidbody rb2 = car2.GetComponent<Rigidbody>();
+                Rigidbody rb2 = MyCar.GetComponent<Rigidbody>();
                 rb2.drag = 23f;
+                count++;
+                if (count > LapCompCar1.counter)
+                {
+                    Announcer.GetComponent<Text>().text = "You have won!";
+                }
+                else
+                {
+                    Announcer.GetComponent<Text>().text = "You have lost! ";
+                }
+                yield return new WaitForSeconds(2f);
+                Panel2.SetActive(true);
+                Panel2Text.GetComponent<Text>().text = $"Name                 Time \n 1. You                 12:21:21 \n 2. Car1                 2:12:11";
+
+                OnGame.GetComponent<AudioSource>().volume = 0.2f;
+                MyCar.GetComponent<CarAudio>().enabled = false;
+                Car1.GetComponent<CarAudio>().enabled = false;
+                Car2.GetComponent<CarAudio>().enabled = false;
+
+                LapCompleteTrig.SetActive(false);
             }
             
 
 
 
-            counterCar1++;
+           
 			
         }
-        else
-        {
-            if(counterCar2 == 1)
-            {
-                Rigidbody rb2 = car2.GetComponent<Rigidbody>();
-                rb2.drag = 23f;
-            }
-            else
-            {
-                Rigidbody rb2 = car2.GetComponent<Rigidbody>();
-                rb2.drag = 0.1f;
-            }
-            counterCar2++;
-        }
+      
         
 
 
 
     }
-    void Update()
-    {
-        if (counterCar1 == 1 && counterCar1 > counterCar2)
-        {
-            Announcer.GetComponent<Text>().text = "You Have won";
+    //void Update()
+    //{
+    //    if (counterCar1 == 1 && counterCar1 > counterCar2)
+    //    {
+    //        Announcer.GetComponent<Text>().text = "You Have won";
 
 
-        }
-        else if (counterCar2 == 1 && counterCar2 > counterCar1)
-        {
-            Announcer.GetComponent<Text>().text = "You lost";
+    //    }
+    //    else if (counterCar2 == 1 && counterCar2 > counterCar1)
+    //    {
+    //        Announcer.GetComponent<Text>().text = "You lost";
 
 
-        }
+    //    }
 
-        //    if(counter == 1)
-        //    {
-        //        car1.GetComponent<CarController>().enabled = false;
-        //        car2.GetComponent<CarController>().enabled = false;
-        //    }
-    }
-    }
+    //    //    if(counter == 1)
+    //    //    {
+    //    //        car1.GetComponent<CarController>().enabled = false;
+    //    //        car2.GetComponent<CarController>().enabled = false;
+    //    //    }
+    //}
+}
