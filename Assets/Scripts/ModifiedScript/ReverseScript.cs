@@ -7,7 +7,7 @@ public class ReverseScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject Car1;
-    public GameObject Car2;
+
     void Update()
     {
         //Debug.Log("It should work!");
@@ -53,35 +53,7 @@ public class ReverseScript : MonoBehaviour
 
 
         }
-        if (Car2.GetComponent<CarController>().CurrentSpeed < 1)
-        {
-
-            yield return new WaitForSeconds(3);
-            if (Car2.GetComponent<CarController>().CurrentSpeed < 1)
-            {
-                Rigidbody rv1 = Car2.GetComponent<Rigidbody>();
-                
-
-                rv1.drag = 0.1f;
-                rv1.AddForce(-5000, 0, 100, ForceMode.Impulse);
-                rv1.AddForce(0, 0, 1000, ForceMode.Impulse);
-
-
-                //rv.AddForce(brakeForce * Time.deltaTime);
-                //rv.AddForce(-rv.velocity*Time.deltaTime);
-
-
-                Debug.Log("It should work");
-                yield return new WaitForSeconds(2);
-                rv1.drag = 0.1f;
-                //rv.AddForce(600, 0, 0, ForceMode.Impulse);
-
-            }
-
-
-
-
-        }
+   
 
 
 

@@ -10,6 +10,10 @@ public class LapCompCar1 : MonoBehaviour
     public static int counter = 0;
     public GameObject reverseObject;
 
+    public static double MinuteFinish;
+    public static double SecondFinish;
+    public static double MilliFinish;
+
     IEnumerator OnTriggerEnter(Collider collision)
     {
 
@@ -45,6 +49,9 @@ public class LapCompCar1 : MonoBehaviour
             }
             else if (counter == 2)
             {
+                MinuteFinish =  LapTimeM.MinuteCount;
+                SecondFinish =LapTimeM.SecondCount;
+                MilliFinish =  LapTimeM.MilliCount;
                 Rigidbody rb = Car1.GetComponent<Rigidbody>();
                 rb.drag = 23f;
                 Rigidbody rb2 = Car1.GetComponent<Rigidbody>();

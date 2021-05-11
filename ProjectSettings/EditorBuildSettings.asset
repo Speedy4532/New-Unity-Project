@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Competition.unity
+    guid: 26aa05358d3db0240bd61f3821453b38
+  - enabled: 1
+    path: Assets/Scenes/New Scene.unity
+    guid: 0d6055b78d20ad54d87367eec9a06d81
+  - enabled: 1
+    path: Assets/Scenes/ModifiedUnityCar.unity
+    guid: 1ff99231bb23bd54fa337f7ec67bf175
+  - enabled: 1
+    path: Assets/Scenes/AfterPlay.unity
+    guid: e51b273f17e0df64da9ed98c0c129cd3
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 009b824c1a0633648809ba5339ac9292
   m_configObjects: {}

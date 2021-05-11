@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityStandardAssets.Vehicles.Car;
+using System;
 
 
 public class LapComp : MonoBehaviour
@@ -10,12 +11,14 @@ public class LapComp : MonoBehaviour
 	public GameObject LapCompleteTrig;
 	public GameObject HalfLapTrig;
 
-	public GameObject MinuteDisplay;
-	public GameObject SecondDisplay;
-	public GameObject MilliDisplay;
+	//public GameObject MinuteDisplay;
+	//public GameObject SecondDisplay;
+	//public GameObject MilliDisplay;
 
-	//public GameObject LapTimeBox;
-	public GameObject Announcer;
+
+
+    //public GameObject LapTimeBox;
+    public GameObject Announcer;
 	public static int count = 0;
    
     public GameObject MyCar;
@@ -102,22 +105,33 @@ public class LapComp : MonoBehaviour
             }
             else if(count == 2)
             {
+                //record the finishing time
+                //MinuteFinish = Convert.ToDouble(Convert.ToString(MinuteDisplay.GetComponent<Text>().text)[:2]);
+                //SecondFinish = Convert.ToDouble(SecondDisplay.GetComponent<Text>().text);
+                //MilliFinish = Convert.ToDouble(MilliDisplay.GetComponent<Text>().text);
+
+
+
                 Rigidbody rb = MyCar.GetComponent<Rigidbody>();
                 rb.drag = 23f;
                 Rigidbody rb2 = MyCar.GetComponent<Rigidbody>();
                 rb2.drag = 23f;
                 count++;
-                if (count > LapCompCar1.counter)
+                if (count > LapCompCar1.counter && count > LapCompCar2.counter)
                 {
                     Announcer.GetComponent<Text>().text = "You have won!";
+                    yield return new WaitForSeconds(3f);
+                    Panel2.SetActive(true);
+                    Panel2Text.GetComponent<Text>().text = $"Name                 Time \n 1. You                 {LapTimeM.MinuteCount}:{LapTimeM.SecondCount}.{Math.Round(LapTimeM.MilliCount, MidpointRounding.AwayFromZero)} \n 2. Car1                 2:12:11";
                 }
-                else
+                else 
                 {
                     Announcer.GetComponent<Text>().text = "You have lost! ";
+                    yield return new WaitForSeconds(3f);
+                    Panel2.SetActive(true);
+                    Panel2Text.GetComponent<Text>().text = $"Name                 Time \n 1. Car1                 {LapCompCar1.MinuteFinish}:{LapCompCar1.SecondFinish}.{LapCompCar1.MilliFinish} \n 2. MyCar                 {LapTimeM.MinuteCount}:{LapTimeM.SecondCount}.{Math.Round(LapTimeM.MilliCount, MidpointRounding.AwayFromZero)}";
                 }
-                yield return new WaitForSeconds(2f);
-                Panel2.SetActive(true);
-                Panel2Text.GetComponent<Text>().text = $"Name                 Time \n 1. You                 12:21:21 \n 2. Car1                 2:12:11";
+              
 
                 OnGame.GetComponent<AudioSource>().volume = 0.2f;
                 MyCar.GetComponent<CarAudio>().enabled = false;

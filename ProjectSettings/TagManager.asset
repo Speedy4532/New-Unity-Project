@@ -8,6 +8,7 @@ TagManager:
   - Dreamc1
   - Fire
   - Car1
+  - Car2
   layers:
   - Default
   - TransparentFX
